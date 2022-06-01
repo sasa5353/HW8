@@ -1,0 +1,16 @@
+project:=prog
+CC:=g++
+dirNamePostfix:=Dir
+dir:=$(project)$(dirNamePostfix)
+ext:=*.cpp
+opt:=
+files:=$(wildcard ./$(dir)/$(ext))
+   obj:=$(patsubst $(ext), %.o, $(files))
+$(project): $(obj)
+	@$(CC) $(opt) $^ -o $@
+%.o : %.cpp
+	@$(CC) -c $(opt) $<
+clean:
+	@rm -f *.o
+clear: clean
+	rm -f $(project)
